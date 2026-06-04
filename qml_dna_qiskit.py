@@ -210,7 +210,7 @@ def order_acc(args):
     sim13 = 1.0 - calculate_edit_distance(s1, s3) / ln
     p12   = run_circuit(params, s1, s2, nq, nl)
     p13   = run_circuit(params, s1, s3, nq, nl)
-    return 1 if (sim12 < sim13) == (p12 < p13) else 0
+    return 1 if (sim12 <= sim13) == (p12 <= p13) else 0
 
 
 # Data generation
