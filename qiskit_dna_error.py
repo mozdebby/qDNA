@@ -127,9 +127,9 @@ class Circuit:
         self.__build_circuit(n_qubit, num_layer)
         
     def __encoding_gates(self, n_qubit: int) -> None:
-        for i in range(n_qubit):
-            self.qc.ry(self.base[i*2], i) 
-            self.qc.p(self.base[i*2+1], i)        
+        for q in range(n_qubit):
+            self.qc.ry(self.base[q*2], q) 
+            self.qc.p(self.base[q*2+1], q)        
 
     def __encoding_gates_dag(self, n_qubit: int) -> None:
         start_idx = n_qubit*2
@@ -187,25 +187,31 @@ class Circuit:
         for i in range(num_layer):
             idx = i*3
             self.__parameterized_circuit(idx, n_qubit)
+            #if i == 0: self.qc.draw(output='mpl', filename=f"fwd")
             self.__encoding_gates(n_qubit)
+            #self.qc.draw(output='mpl', filename=f"fwd{i}")
 
         # Backward pass
         for i in range(num_layer):
             idx = num_layer*3 - i*3 - 3
             self.__encoding_gates_dag(n_qubit)
             self.__parameterized_circuit_dag(idx, n_qubit)
+            #self.qc.draw(output='mpl', filename=f"bwd{i}")
         
         # if self.shots > 1 and with_noise == 0:
         #     self.qc.measure_all()
         #     self.simulator = AerSimulator()
         #     self.qc = transpile(self.qc, self.simulator)
-        
+
         if self.noisy:
             if self.noise_model == 'fake_backend':
-                #start = time.perf_counter()
+                #start = time.perf_counter()      
+                #self.qc.draw(output='mpl', filename=f"pre-transpile")          
                 self.qc.measure_all()
                 self.backend = FakeSherbrooke()
-                self.qc = transpile(self.qc, self.backend, optimization_level=3)
+                self.qc = transpile(self.qc, self.backend, optimization_level=2)
+                self.qc.draw(output='mpl', filename="post-transpile_sherbrooke_opt-level2")
+                #time.sleep(100)
             else:
                 self.qc.measure_all()
                 p1=0.001 
