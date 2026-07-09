@@ -208,9 +208,11 @@ class Circuit:
                 #start = time.perf_counter()      
                 #self.qc.draw(output='mpl', filename=f"pre-transpile")          
                 self.qc.measure_all()
-                self.backend = FakeSherbrooke()
+                self.backend = FakeCasablancaV2()
+                print(f"gate count: {self.qc.count_ops()}")
                 self.qc = transpile(self.qc, self.backend, optimization_level=2)
-                self.qc.draw(output='mpl', filename="post-transpile_sherbrooke_opt-level2")
+                print(f"gate count: {self.qc.count_ops()}")
+                #self.qc.draw(output='mpl', filename="post-transpile_sherbrooke_opt-level2")
                 #time.sleep(100)
             else:
                 self.qc.measure_all()

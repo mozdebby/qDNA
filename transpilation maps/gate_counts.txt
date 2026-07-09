@@ -1,0 +1,23 @@
+For sherbrooke: 
+
+    7 qubits, 1 layer, opt-level 2:
+
+        gate count before transpilation: OrderedDict({'ry': 28, 'cx': 24, 'rz': 14, 'p': 14, 'measure': 7, 'rx': 2, 'barrier': 1})
+        gate count after transpilation: OrderedDict({'rz': 288, 'sx': 169, 'ecr': 81, 'measure': 7, 'x': 4, 'barrier': 1})
+
+    for 12 layers
+
+        gate count before transpilation: OrderedDict({'ry': 336, 'cx': 288, 'rz': 168, 'p': 168, 'rx': 24, 'measure': 7, 'barrier': 1})
+        gate count after transpilation: OrderedDict({'rz': 4330, 'sx': 2338, 'ecr': 1128, 'x': 166, 'measure': 7, 'barrier': 1})
+
+for casablanca:
+
+    7 qubits, 1 layer, opt-level 2:
+
+        gate count before transpilation: OrderedDict({'ry': 28, 'cx': 24, 'rz': 14, 'p': 14, 'measure': 7, 'rx': 2, 'barrier': 1})
+        gate count after transpilation: OrderedDict({'rz': 90, 'cx': 66, 'sx': 60, 'measure': 7, 'barrier': 1})
+
+    for 12 layers:
+
+        gate count: OrderedDict({'ry': 336, 'cx': 288, 'rz': 168, 'p': 168, 'rx': 24, 'measure': 7, 'barrier': 1})
+        gate count: OrderedDict({'cx': 1122, 'rz': 1058, 'sx': 720, 'measure': 7, 'barrier': 1})
